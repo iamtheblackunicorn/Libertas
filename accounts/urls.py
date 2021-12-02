@@ -13,6 +13,7 @@ urlpatterns = [
     path('register/', views.register_user, name='register'),
     path('deleteaccount/', views.delete_user, name='deleteaccount'),
     path('dashboard/<str:username>', views.dashboard, name='dashboard'),
+    path('profileAction/follow/<str:username>', views.followRequest, name='followUser')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

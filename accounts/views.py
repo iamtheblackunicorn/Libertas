@@ -59,6 +59,18 @@ def delete_user(request):
     u.delete()
     return redirect('accounts:home')
 @login_required
+def followRequest(request, username):
+    loggedInUserUsername = request.user.username
+    try:
+        followingUser = request.user
+        userToFollow = LibertasUser.objects.get(username=username)
+        userToFollow.follower = followingUser
+        followingUser.following = userToFollow
+        return redirect('bits:publicProfileView', username=username)
+    except Exception as error:
+        print(str(error))
+        return redirect('accounts:dashboard', username=loggedInUserUsername)
+@login_required
 def dashboard(request, username):
     username = request.user.username
     apiAuth = request.user.apiAuth
