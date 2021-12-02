@@ -66,7 +66,9 @@ def followRequest(request, username):
         userToFollow = LibertasUser.objects.get(username=username)
         userToFollow.follower = followingUser
         followingUser.following = userToFollow
-        return redirect('bits:publicProfileView', username=username)
+        userToFollow.save()
+        followingUser.save()
+        return redirect('bits:internalProfileView', username=username)
     except Exception as error:
         print(str(error))
         return redirect('accounts:dashboard', username=loggedInUserUsername)

@@ -14,7 +14,7 @@ def newBit(request, username):
             bitBody = form.save(commit=False)
             bitBody.sender = request.user
             bitBody.save()
-            return redirect('bits:publicProfileView', username=username)
+            return redirect('bits:internalProfileView', username=username)
     else:
         form = BitForm()
     return render(request, 'bits/new.html', {'form': form})
@@ -32,6 +32,18 @@ def publicProfileViewLoggedIn(request, username):
         pass
     return render(request, 'bits/internalProfile.html', {'bits': yourBits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount})
 
+@login_required
+def getTheLatestTweetsFromFollowing(request):
+    username = request.user.username
+    bitList = []
+    you = LibertasUser.objects.get(username=username)
+    allUsersFollowed = LibertasUser.objects.all().filter(follower=you.pk)
+    for i in allUsersFollowed:
+        userObject = i
+        bitList = bitList + [Bit.objects.filter(sender=userObject.pk).order_by('date').first()]
+    return render(request, 'bits/profileHome.html', 'content':bitList)
+
+
 def publicProfileView(request, username):
     you = LibertasUser.objects.get(username=username)
     yourBits = Bit.objects.all().filter(sender=you.pk)
@@ -43,7 +55,3 @@ def publicProfileView(request, username):
     else:
         pass
     return render(request, 'bits/publicProfile.html', {'bits': yourBits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount})
-
-def getTheLatestTweetsFromFollowing(request, username):
-    pass
-    #TableName.objects.filter(key=value).order_by('-date_filed').first()
