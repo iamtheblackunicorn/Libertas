@@ -9,8 +9,8 @@
     <p><img src="{{ banner_pic }}"/></p>
     <p>Your API Auth is: {{ apiAuth }}</p>
     <p>Welcome to Libertas {{ username }}</p>.
-    
-    <p><button onclick="window.location.href='{% url 'accounts:logout' %}'">LOGOUT</button></p>
+
+    <p><button onclick="window.location.href='{% url 'bits:internalProfileView' username=request.user.username %}'">Your profile</button></p>
     <p><button onclick="window.location.href='{% url 'accounts:logout' %}'">LOGOUT</button></p>
     <p><button onclick="window.location.href='{% url 'accounts:deleteaccount' %}'">DELETE ACCOUNT</button></p>
     <p><button onclick="window.location.href='{% url 'bits:newBit' username=request.user.username %}'">NEW BIT</button></p>
