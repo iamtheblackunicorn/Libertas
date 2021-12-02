@@ -1,0 +1,15 @@
+{% block content %}
+{% load static %}
+ <!DOCTYPE html>
+  <html>
+   {% include "accounts/includes/header.html" %}
+   <body>
+    <h1>LOGIN</h1>
+    <form method="POST">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <button type="submit">Login</button>
+    </form>
+   </body>
+  </html>
+{% endblock %}

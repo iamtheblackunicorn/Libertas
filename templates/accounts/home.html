@@ -1,0 +1,11 @@
+{% block content %}
+{% load static %}
+ <!DOCTYPE html>
+  <html>
+   {% include "accounts/includes/header.html" %}
+   <body>
+    <button onclick="window.location.href='{% url 'accounts:login' %}'">LOGIN</button>
+    <button onclick="window.location.href='{% url 'accounts:register' %}'">REGISTER</button>
+   </body>
+  </html>
+{% endblock %}

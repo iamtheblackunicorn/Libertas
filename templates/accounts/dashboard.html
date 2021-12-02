@@ -1,0 +1,17 @@
+{% block content %}
+{% load static %}
+ <!DOCTYPE html>
+  <html>
+   {% include "accounts/includes/header.html" %}
+   <body>
+    <h1>YOUR DASHBOARD</h1>
+    <p><img src="{{ profile_pic }}"/></p>
+    <p><img src="{{ banner_pic }}"/></p>
+    <p>Your API Auth is: {{ apiAuth }}</p>
+    <p>Welcome to Libertas {{ username }}</p>.
+    <p><button onclick="window.location.href='{% url 'accounts:logout' %}'">LOGOUT</button></p>
+    <p><button onclick="window.location.href='{% url 'accounts:deleteaccount' %}'">DELETE ACCOUNT</button></p>
+    <p><button onclick="window.location.href='{% url 'bits:newBit' username=request.user.username %}'">NEW BIT</button></p>
+   </body>
+  </html>
+{% endblock %}

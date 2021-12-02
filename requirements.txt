@@ -1,0 +1,4 @@
+django
+pip
+setuptools
+wheel

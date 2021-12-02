@@ -1,0 +1,12 @@
+{% block content %}
+ <!DOCTYPE html>
+  <html>
+   {% include "accounts/includes/header.html" %}
+   <body>
+     <h1>@{{ username }}</h1>
+     {% for bit in bits.all %}
+      <p>{{ bit.bitBody }}<a href="{% url 'bits:newBit' username=request.user.username %}">Answer</a></p>
+     {% endfor %}
+   </body>
+  </html>
+{% endblock %}
