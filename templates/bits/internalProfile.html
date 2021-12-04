@@ -8,11 +8,14 @@
      <p>Followers: {{ followerCount }}</p>
      <p>Following: {{ followingCount }}</p>
      <p>Follow <a href="{% url 'accounts:followUser' username=username %}">@{{ username }}</a></p>
-     {% if bits.all %}
-     {% for bit in bits.all %}
-      <p>{{ bit.bitBody }}<a href="{% url 'bits:likeBit' bitPk=bit.pk %}">Like</a></p>
-      <a href="{% url 'bits:reBit' bitPk=bit.pk %}">Rebit</a>
+     {% if bits.items %}
+     <hr/>
+     {% for key,value in bits.items %}
+      <p>{{ key }} by {{ value.1 }}<a href="{% url 'bits:likeBit' bitPk=value.2 %}">Like</a></p>
+      <a href="{% url 'bits:reBit' bitPk=value.2 %}">Rebit</a>
+      <p>This bit has been liked {{ value.0 }} times.</p>
      {% endfor %}
+     <hr/>
      {% else %}
      <p>No bits posted by this user yet!</p>
      {% endif %}
