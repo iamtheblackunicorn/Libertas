@@ -1,9 +1,7 @@
-# Krypton by Alexander Abraham, "The Black Unicorn".
+# Libertas by Alexander Abraham, "The Black Unicorn".
 # Licensed under the MIT license.
-
 from django import forms
 from .models import Bit
-
 class BitForm(forms.ModelForm):
     class Meta:
         model = Bit

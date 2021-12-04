@@ -10,7 +10,8 @@
      <p>Follow <a href="{% url 'accounts:followUser' username=username %}">@{{ username }}</a></p>
      {% if bits.all %}
      {% for bit in bits.all %}
-      <p>{{ bit.bitBody }}<a href="{% url 'bits:newBit' username=request.user.username %}">Answer</a></p>
+      <p>{{ bit.bitBody }}<a href="{% url 'bits:likeBit' bitPk=bit.pk %}">Like</a></p>
+      <a href="{% url 'bits:reBit' bitPk=bit.pk %}">Rebit</a>
      {% endfor %}
      {% else %}
      <p>No bits posted by this user yet!</p>

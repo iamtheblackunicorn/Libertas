@@ -1,11 +1,9 @@
-# Krypton by Alexander Abraham, "The Black Unicorn".
+# Libertas by Alexander Abraham, "The Black Unicorn".
 # Licensed under the MIT license.
-
 from django import forms
 from .models import LibertasUser
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
-
 class NewUserForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = LibertasUser
@@ -25,9 +23,6 @@ class NewUserForm(UserCreationForm):
         super(NewUserForm, self).__init__(*args, **kwargs)
         for fieldname in ['password1', 'password2']:
             self.fields[fieldname].help_text = None
-        #self.fields['profile_pic'].required = False
-        #self.fields['banner_pic'].required = False
-
 class OldUserChangeForm(UserChangeForm):
     class Meta:
         model = LibertasUser

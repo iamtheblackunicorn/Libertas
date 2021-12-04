@@ -9,6 +9,8 @@ app_name = 'bits'
 urlpatterns = [
     path('timeline', views.getTheLatestTweetsFromFollowing, name='timeline'),
     path('user/<str:username>', views.publicProfileView, name='publicProfileView'),
+    path('bitActionLike/<int:bitPk>', views.likeBit, name='likeBit'),
+    path('bitActionReBit/<int:bitPk>', views.reBit, name='reBit'),
     path('profile/<str:username>/new', views.newBit, name='newBit'),
     path('profile/<str:username>', views.publicProfileViewLoggedIn, name='internalProfileView'),
 ]
