@@ -41,7 +41,7 @@ def getTheLatestTweetsFromFollowing(request):
     for i in allUsersFollowed:
         userObject = i
         bitList = bitList + [Bit.objects.filter(sender=userObject.pk).order_by('date').first()]
-    return render(request, 'bits/profileHome.html', {'content':bitList})
+    return render(request, 'bits/profileHome.html', {'content':bitList, 'username':username})
 
 
 def publicProfileView(request, username):

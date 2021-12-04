@@ -4,6 +4,7 @@
    {% include "accounts/includes/header.html" %}
    <body>
      <h1>@{{ username }}</h1>
+     <p>Back to Dashboard <a href="{% url 'accounts:dashboard' username=username %}">@{{ username }}</a></p>
      <p>Followers: {{ followerCount }}</p>
      <p>Follow <a href="{% url 'accounts:followUser' username=username %}">@{{ username }}</a></p>
      {% for bit in bits.all %}

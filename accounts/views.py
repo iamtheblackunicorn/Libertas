@@ -62,14 +62,14 @@ def delete_user(request):
 def followRequest(request, username):
     loggedInUserUsername = request.user.username
     try:
-        followingUser = request.user
         userToFollow = LibertasUser.objects.get(username=username)
-        userToFollow.follower = followingUser
-        followingUser.following = userToFollow
+        userToFollow.follower = request.user
         userToFollow.save()
-        followingUser.save()
+        
+        print('Success!')
         return redirect('bits:internalProfileView', username=username)
     except Exception as error:
+        print('Error!')
         print(str(error))
         return redirect('accounts:dashboard', username=loggedInUserUsername)
 @login_required
