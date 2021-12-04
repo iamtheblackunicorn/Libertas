@@ -21,16 +21,16 @@ def newBit(request, username):
 
 @login_required
 def publicProfileViewLoggedIn(request, username):
-    you = LibertasUser.objects.get(username=username)
-    yourBits = Bit.objects.all().filter(sender=you.pk)
-    profile_pic = you.profile_pic.url
-    banner_pic = you.banner_pic.url
+    loggedInUser = request.user.username
+    alien = LibertasUser.objects.get(username=username)
+    bits = Bit.objects.all().filter(sender=alien.pk)
+    profile_pic = alien.profile_pic.url
+    banner_pic = alien.banner_pic.url
     followerCount = 0
-    if LibertasUser.objects.filter(following=you.pk).all().exists():
-        followerCount = LibertasUser.objects.filter(follower=you.pk).all().count()
-    else:
-        pass
-    return render(request, 'bits/internalProfile.html', {'bits': yourBits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount})
+    followingCount = 0
+    followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
+    followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
+    return render(request, 'bits/internalProfile.html', {'bits': bits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount, 'loggedInUserName':loggedInUser})
 
 @login_required
 def getTheLatestTweetsFromFollowing(request):
@@ -41,17 +41,16 @@ def getTheLatestTweetsFromFollowing(request):
     for i in allUsersFollowed:
         userObject = i
         bitList = bitList + [Bit.objects.filter(sender=userObject.pk).order_by('date').first()]
-    return render(request, 'bits/profileHome.html', {'content':bitList, 'username':username})
+    return render(request, 'bits/timeline.html', {'content':bitList, 'username':username})
 
 
 def publicProfileView(request, username):
-    you = LibertasUser.objects.get(username=username)
-    yourBits = Bit.objects.all().filter(sender=you.pk)
-    profile_pic = you.profile_pic.url
-    banner_pic = you.banner_pic.url
+    alien = LibertasUser.objects.get(username=username)
+    bits = Bit.objects.all().filter(sender=alien.pk)
+    profile_pic = alien.profile_pic.url
+    banner_pic = alien.banner_pic.url
     followerCount = 0
-    if LibertasUser.objects.filter(following=you.pk).all().exists():
-        followerCount = LibertasUser.objects.filter(follower=you.pk).all().count()
-    else:
-        pass
-    return render(request, 'bits/publicProfile.html', {'bits': yourBits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount})
+    followingCount = 0
+    followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
+    followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
+    return render(request, 'bits/publicProfile.html', {'bits': bits, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount})

@@ -16,6 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
+
 def homeView(request):
     return render(request, 'accounts/home.html')
 def register_user(request):
@@ -60,18 +61,27 @@ def delete_user(request):
     return redirect('accounts:home')
 @login_required
 def followRequest(request, username):
-    loggedInUserUsername = request.user.username
+    # Adri is logged in, following alexandera21
+    # username = alexandera21 (alien)
+    # request.user.username = adri (ME)
+    you = LibertasUser.objects.get(username=request.user.username)
+    alienUser = LibertasUser.objects.get(username=username)
     try:
-        userToFollow = LibertasUser.objects.get(username=username)
-        userToFollow.follower = request.user
-        userToFollow.save()
-        
+        you.following = alienUser
+        you.save()
+        alienUser.follower = you
+        alienUser.save()
+        print('\n')
         print('Success!')
+        print('\n')
         return redirect('bits:internalProfileView', username=username)
     except Exception as error:
+        print('\n')
         print('Error!')
+        print('\n')
         print(str(error))
-        return redirect('accounts:dashboard', username=loggedInUserUsername)
+        print('\n')
+        return redirect('accounts:dashboard', username=you.username)
 @login_required
 def dashboard(request, username):
     username = request.user.username
