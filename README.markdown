@@ -68,5 +68,5 @@ Getting started with using ***Libertas*** is easy.
 
 ## NOTE :scroll:
 
-- *Libertas :peace_symbol: :fox:* by Alexander Abraham :black_heart: a.k.a. *"The Black Unicorn" :unicorn:*
+- *Libertas :peace_symbol: :fox_face:* by Alexander Abraham :black_heart: a.k.a. *"The Black Unicorn" :unicorn:*
 - Licensed under the MIT license.
