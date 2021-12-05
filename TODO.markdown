@@ -1,13 +1,13 @@
 # TODO
 
-[ ] New logo.
-[ ] Fix layout.
+[x] New logo.
+[x] Fix layout.
+[x] Add SEO.
+[x] Add responsivity `meta` tag.
+[x] Add Favicons.
+[x] Add Banner.
+[x] Add README.
 [ ] Add mobile view.
-[ ] Add SEO.
-[ ] Add responsivity `meta` tag.
-[ ] Add Banner.
-[ ] Add README.
-[ ] Add Favicons.
 [ ] Add Stripe.
 [ ] Buy custom domain.
 [ ] Deploy on PythonAnywhere.
