@@ -2,9 +2,9 @@
  <img width="400" src="https://blckunicorn.art/assets/libertas/images/banner/kitsune.svg"/>
 </p>
 
-# LIBERTAS :peace_symbol: :fox:
+# LIBERTAS :peace_symbol: :fox_face:
 
-***A social network where nobody gets cancelled, de-platformed, or bullied. Say what YOU want to say!*** :peace_symbol: :fox:
+***A social network where nobody gets cancelled, de-platformed, or bullied. Say what YOU want to say!*** :peace_symbol: :fox_face:
 
 ## ABOUT :books:
 
