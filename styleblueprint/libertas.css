@@ -44,6 +44,7 @@ div.banner {
   top: 0;
   left: 0;
   bottom: 0;
+  background-color: var(--accent-color);
 }
 img.landingBanner {
   height: 100vh;
@@ -370,4 +371,82 @@ button.newBit:hover {
   background-color: var(--accent-color);
   color: var(--main-color);
   border: 2px solid var(--main-color);
+}
+
+@media screen and (max-width: 800px) {
+  div.banner {
+    display: none;
+  }
+  img.landingBanner {
+    display: none;
+  }
+  div.loginActionDiv {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+  }
+  div.content {
+    padding-top: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  input[type=text] {
+    font-size: 15px;
+    width: 200px;
+  }
+  p {
+    font-size: 15px;
+  }
+  button.action {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 15px;
+  }
+  button.actionNew {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 15px;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  label {
+    font-size: 15px;
+  }
+  h1.general {
+    font-size: 25px;
+  }
+  div.newBit {
+    width: 87%;
+    margin-left: 7%;
+    margin-right: 9%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    height: 26vh;
+    border-radius: 20px;
+  }
+  button.newBit {
+    font-size: 15px;
+    padding: 7px;
+    margin-left: 20px;
+    margin-bottom: 25px;
+  }
+  input[type=text].newBit {
+    width: 80%;
+    font-size: 15px;
+    border-radius: 20px;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    background-color: var(--accent-color);
+    font-family: var(--std-font-family);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
 }
