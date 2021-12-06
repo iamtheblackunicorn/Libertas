@@ -12,11 +12,13 @@
 
     <div class="newBit">
      <h1 class="newBit">NEW BIT</h1>
-     <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button class="newBit" type="submit">Save</button>
-     </form>
+     <div class="newBitForm">
+      <form method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button class="newBit" type="submit">Save</button>
+      </form>
+     </div>
     </div>
 
   </html>

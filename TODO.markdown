@@ -7,9 +7,7 @@
 - [x] Add Banner.
 - [x] Add README.
 - [x] Add mobile view.
+- [x] Fix layout.
 - [ ] Add Google Analytics.
-- [ ] Add API calls.
-- [ ] Fix layout.
-- [ ] Add Stripe.
 - [ ] Buy custom domain.
 - [ ] Deploy on PythonAnywhere.
