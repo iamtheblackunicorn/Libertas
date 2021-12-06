@@ -2,3 +2,4 @@ django
 pip
 setuptools
 wheel
+Pillow
