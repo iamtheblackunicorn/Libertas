@@ -3,8 +3,17 @@
   <html>
    {% include "accounts/includes/header.html" %}
    <body>
-    <button onclick="window.location.href='{% url 'accounts:login' %}'">LOGIN</button>
-    <button onclick="window.location.href='{% url 'accounts:register' %}'">REGISTER</button>
+     <div class="banner">
+      <img class="landingBanner" src="https://blckunicorn.art/assets/libertas/images/banner/kitsune.svg"/>
+     </div>
+     <div class="loginActionDiv">
+      <div class="content">
+       <h1>LIBERTAS</h1>
+        <p>Libertas, a social network about freedom of expression.</p>
+        <button class="actionNew" onclick="window.location.href='{% url 'accounts:login' %}'">LOGIN</button>
+        <button class="actionNew" onclick="window.location.href='{% url 'accounts:register' %}'">REGISTER</button>
+      </div>
+     </div>
    </body>
   </html>
 {% endblock %}

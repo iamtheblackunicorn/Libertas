@@ -3,16 +3,48 @@
   <html>
    {% include "accounts/includes/header.html" %}
    <body>
-    <h1>YOUR DASHBOARD</h1>
-    <p><img src="{{ profile_pic }}"/></p>
-    <p><img src="{{ banner_pic }}"/></p>
-    <p>Your API Auth is: {{ apiAuth }}</p>
-    <p>Welcome to Libertas {{ username }}</p>.
-    <p><button onclick="window.location.href='{% url 'bits:timeline' %}'">Your Timeline</button></p>
-    <p><button onclick="window.location.href='{% url 'bits:internalProfileView' username=request.user.username %}'">Your profile</button></p>
-    <p><button onclick="window.location.href='{% url 'accounts:logout' %}'">LOGOUT</button></p>
-    <p><button onclick="window.location.href='{% url 'accounts:deleteaccount' %}'">DELETE ACCOUNT</button></p>
-    <p><button onclick="window.location.href='{% url 'bits:newBit' username=request.user.username %}'">NEW BIT</button></p>
+
+    <div class="menuRibbon">
+     <h1 class="general">YOUR DASHBOARD</h1>
+    </div>
+
+    <div class="profileBanner">
+     <img class="profileBanner" src="{{ banner_pic }}"/>
+    </div>
+
+    <div class="userInfo">
+     <img class="profilePicture" src="{{ profile_pic }}"/>
+     <p class="username">{{ username }}</p>
+     <p class="bio">{{ bio }}</p>
+     <p class="followInfo">API Key: {{ apiAuth }}</p>
+    </div>
+
+    <div class="accountActions">
+     <button class="accountAction" onclick="window.location.href='{% url 'bits:timeline' %}'">Timeline</button>
+     <button class="accountAction" onclick="window.location.href='{% url 'bits:internalProfileView' username=request.user.username %}'">Profile</button>
+     <button class="accountAction" onclick="window.location.href='{% url 'accounts:logout' %}'">Logout</button>
+     <button class="accountAction" onclick="window.location.href='{% url 'accounts:deleteaccount' %}'">Delete Account</button>
+     <button class="accountAction" onclick="window.location.href='{% url 'bits:newBit' username=request.user.username %}'">New Bit</button>
+     </body>
+    </div>
+
+    {% if bits.all %}
+     {% for bit in bits.all %}
+      <div class="bit">
+       <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+       <p class="bitUserName">@{{ username }}</p>
+       <p class="bit">{{ bit.bitBody }}</p>
+      </div>
+     {% endfor %}
+    {% else %}
+     <div class="bit">
+      <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+      <p class="bitUserName">@{{ username }}</p>
+      <p class="bit">No bits yet. :(</p>
+      <hr/>
+    </div>
+   {% endif %}
+
    </body>
   </html>
 {% endblock %}

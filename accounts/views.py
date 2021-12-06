@@ -2,6 +2,7 @@
 # Licensed under the MIT license.
 from .forms import *
 from django import forms
+from bits.models import Bit
 from django.utils.http import *
 from django.utils.encoding import *
 from django.shortcuts import render
@@ -71,16 +72,8 @@ def followRequest(request, username):
         you.save()
         alienUser.follower = you
         alienUser.save()
-        print('\n')
-        print('Success!')
-        print('\n')
         return redirect('bits:internalProfileView', username=username)
     except Exception as error:
-        print('\n')
-        print('Error!')
-        print('\n')
-        print(str(error))
-        print('\n')
         return redirect('accounts:dashboard', username=you.username)
 @login_required
 def dashboard(request, username):
@@ -88,4 +81,6 @@ def dashboard(request, username):
     apiAuth = request.user.apiAuth
     profile_pic = request.user.profile_pic.url
     banner_pic = request.user.banner_pic.url
-    return render(request, 'accounts/dashboard.html', {'username':username, 'apiAuth':apiAuth, 'profile_pic':profile_pic, 'banner_pic':banner_pic})
+    bio = request.user.bio
+    bits = Bit.objects.all().filter(sender=request.user.pk)
+    return render(request, 'accounts/dashboard.html', {'username':username, 'bio':bio, 'apiAuth':apiAuth, 'profile_pic':profile_pic, 'bits':bits, 'banner_pic':banner_pic})

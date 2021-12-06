@@ -9,12 +9,14 @@ class NewUserForm(UserCreationForm):
         model = LibertasUser
         labels = {
           'username':'Username',
-          'apiAuth':'App password',
+          'bio':'About',
+          'apiAuth':'Auth',
           'profile_pic':'Profile Picture',
           'banner_pic':'Banner Picture'
         }
         fields = (
         'username',
+        'bio',
         'apiAuth',
         'profile_pic',
         'banner_pic',

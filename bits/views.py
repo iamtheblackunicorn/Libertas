@@ -26,6 +26,7 @@ def publicProfileViewLoggedIn(request, username):
     bits = Bit.objects.all().filter(sender=alien.pk)
     profile_pic = alien.profile_pic.url
     banner_pic = alien.banner_pic.url
+    bio = LibertasUser.objects.get(username=username).bio
     followerCount = 0
     followingCount = 0
     bitLikeDict = {}
@@ -41,7 +42,7 @@ def publicProfileViewLoggedIn(request, username):
     followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
     followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
     print(bitLikeDict)
-    return render(request, 'bits/internalProfile.html', {'bits': bitLikeDict, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount, 'loggedInUserName':loggedInUser})
+    return render(request, 'bits/internalProfile.html', {'bits': bitLikeDict, 'bio':bio, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount, 'loggedInUserName':loggedInUser})
 
 
 @login_required
@@ -86,6 +87,7 @@ def getTheLatestTweetsFromFollowing(request):
 @login_required
 def publicProfileView(request, username):
     alien = LibertasUser.objects.get(username=username)
+    bio = LibertasUser.objects.get(username=username).bio
     bits = Bit.objects.all().filter(sender=alien.pk)
     profile_pic = alien.profile_pic.url
     banner_pic = alien.banner_pic.url
@@ -103,5 +105,4 @@ def publicProfileView(request, username):
             bitLikeDict[bitText] = [likeCount,bitSender,bitPk]
     followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
     followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
-    print(bitLikeDict)
-    return render(request, 'bits/publicProfile.html', {'bits': bitLikeDict, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount})
+    return render(request, 'bits/publicProfile.html', {'bits': bitLikeDict, 'bio':bio, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount})

@@ -3,12 +3,24 @@
   <html>
    {% include "accounts/includes/header.html" %}
    <body>
-    <h1>LOGIN</h1>
-    <form method="POST">
-     {% csrf_token %}
-     {{ form.as_p }}
-     <button type="submit">Login</button>
-    </form>
-   </body>
-  </html>
+
+    <div class="banner">
+     <img class="landingBanner" src="https://blckunicorn.art/assets/libertas/images/banner/kitsune.svg"/>
+    </div>
+
+    <div class="loginActionDiv">
+
+     <div class="content">
+      <h1>LOGIN</h1>
+      <form method="POST">
+       {% csrf_token %}
+       {{ form.as_p }}
+      <button class="action" type="submit">Login</button>
+     </form>
+    </div>
+
+   </div>
+
+  </body>
+ </html>
 {% endblock %}

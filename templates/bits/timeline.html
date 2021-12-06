@@ -1,15 +1,30 @@
 {% block content %}
  <!DOCTYPE html>
   <html>
+
    {% include "accounts/includes/header.html" %}
+
    <body>
-     <h1>@{{ username }}</h1>
-     {% if content %}
-      {% for object in content %}
-      <p>{{ object.bitBody }} by {{ object.sender }}</p>
-      {% endfor %}
-     {% else %}
-     {% endif %}
+   {% if content %}
+    {% for object in content %}
+     <div class="bit">
+      <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+      <p class="bitUserName">{{ object.sender }}</p>
+      <p class="bit">{{ object.bitBody }}</p>
+      <hr/>
+      <button class="bitAction">ReBit</button>
+      <button class="bitAction">Like</button>
+      <p class="bitAction">2.3k</p>
+    </div>
+    {% endfor %}
+   {% else %}
+   <div class="bit">
+    <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+    <p class="bitUserName">@{{ username }}</p>
+    <p class="bit"><p>No bits posted by this user yet!</p></p>
+    <hr/>
+   </div>
+   {% endif %}
    </body>
   </html>
 {% endblock %}

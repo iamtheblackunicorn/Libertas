@@ -3,22 +3,49 @@
   <html>
    {% include "accounts/includes/header.html" %}
    <body>
-     <h1>@{{ username }}</h1>
-     <p>Back to Dashboard <a href="{% url 'accounts:dashboard' username=loggedInUserName %}">@{{ loggedInUserName }}</a></p>
-     <p>Followers: {{ followerCount }}</p>
-     <p>Following: {{ followingCount }}</p>
-     <p>Follow <a href="{% url 'accounts:followUser' username=username %}">@{{ username }}</a></p>
-     {% if bits.items %}
-     <hr/>
+     <div class="profileBanner">
+      <img class="profileBanner" src="{{ banner_pic }}"/>
+     </div>
+
+     <div class="userInfo">
+      <img class="profilePicture" src="{{ profile_pic }}"/>
+      <p class="username">{{ username }}</p>
+      <p class="bio">{{ bio }}</p>
+      <p class="followInfo">Followers: {{ followerCount }} Following: {{ followingCount }}</p>
+     </div>
+
+     <div class="accountActions">
+      <button class="accountAction" onclick="window.location.href='{% url 'accounts:dashboard' username=loggedInUserName %}'">Dashboard</button>
+      <button class="accountAction" onclick="window.location.href='{% url 'accounts:followUser' username=username %}'">Follow</button>
+     </div>
+
+    {% if bits.items %}
+
      {% for key,value in bits.items %}
-      <p>{{ key }} by {{ value.1 }}<a href="{% url 'bits:likeBit' bitPk=value.2 %}">Like</a></p>
-      <a href="{% url 'bits:reBit' bitPk=value.2 %}">Rebit</a>
-      <p>This bit has been liked {{ value.0 }} times.</p>
+
+      <div class="bit">
+       <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+       <p class="bitUserName">@{{ value.1 }}</p>
+       <p class="bit">{{ key }}</p>
+       <hr/>
+       <button onclick="window.location.href='{% url 'bits:reBit' bitPk=value.2 %}'" class="bitAction">ReBit</button>
+       <button onclick="window.location.href='{% url 'bits:likeBit' bitPk=value.2 %}'" class="bitAction">Like</button>
+       <p class="bitAction">{{ value.0 }}</p>
+      </div>
+
      {% endfor %}
-     <hr/>
-     {% else %}
-     <p>No bits posted by this user yet!</p>
-     {% endif %}
+
+    {% else %}
+
+     <div class="bit">
+      <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+      <p class="bitUserName">@{{ username }}</p>
+      <p class="bit"><p>No bits posted by this user yet!</p></p>
+      <hr/>
+     </div>
+
+    {% endif %}
+    
    </body>
   </html>
 {% endblock %}

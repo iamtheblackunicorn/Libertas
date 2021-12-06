@@ -3,19 +3,43 @@
   <html>
    {% include "accounts/includes/header.html" %}
    <body>
-     <h1>@{{ username }}</h1>
-     <p>Followers: {{ followerCount }}</p>
-     <p>Following: {{ followingCount }}</p>
-     {% if bits.items %}
-     <hr/>
+     <div class="profileBanner">
+      <img class="profileBanner" src="{{ banner_pic }}"/>
+     </div>
+
+     <div class="userInfo">
+      <img class="profilePicture" src="{{ profile_pic }}"/>
+      <p class="username">{{ username }}</p>
+      <p class="bio">{{ bio }}</p>
+      <p class="followInfo">Followers: {{ followerCount }} Following: {{ followingCount }}</p>
+     </div>
+
+     
+    {% if bits.items %}
+
      {% for key,value in bits.items %}
-      <p>{{ key }} by {{ value.1 }}
-      <p>This bit has been liked {{ value.0 }} times.</p>
+
+      <div class="bit">
+       <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+       <p class="bitUserName">@{{ value.1 }}</p>
+       <p class="bit">{{ key }}</p>
+       <hr/>
+       <button onclick="window.location.href='{% url 'bits:reBit' bitPk=value.2 %}'" class="bitAction">ReBit</button>
+       <button onclick="window.location.href='{% url 'bits:likeBit' bitPk=value.2 %}'" class="bitAction">Like</button>
+       <p class="bitAction">{{ value.0 }}</p>
+      </div>
+
      {% endfor %}
-     <hr/>
-     {% else %}
-     <p>No bits posted by this user yet!</p>
-     {% endif %}
+
+    {% else %}
+
+     <div class="bit">
+      <p class="bit"><p>No bits posted by this user yet!</p></p>
+      <hr/>
+     </div>
+
+    {% endif %}
+
    </body>
   </html>
 {% endblock %}
