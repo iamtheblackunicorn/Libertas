@@ -12,7 +12,7 @@ Since I saw that governments and social media companies are de-platforming or ou
 
 ## TRY IT :test_tube:
 
-You can find a live deployed version of the social network [here](blvckuncrn.pythonanywhere.com).
+You can find a live deployed version of the social network [here](https://blvckuncrn.pythonanywhere.com).
 
 ## SETTING UP :hammer:
 
