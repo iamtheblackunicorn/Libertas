@@ -10,9 +10,14 @@
 
 Since I saw that governments and social media companies are de-platforming or outright cancelling people for uttering controversial views or views that do not fit in with the mainstream narrative of lies and deceit, I thought I'd create a social network that lets anyone say whatever they want, anywhere. You can do on here whatever the hell you want. I will not step in your way and should this become larger, neither will anyone else.
 
+## WARNING :warning:
+
+This project is still under active development.
+You can find a list of things still to implement, [here](TODO.markdown).
+
 ## TRY IT :test_tube:
 
-You can find a live deployed version of the social network [here](https://blvckuncrn.pythonanywhere.com).
+You can find a live deployed version of the social network [here](https://www.libertas.vip).
 
 ## SETTING UP :hammer:
 
@@ -62,12 +67,15 @@ To deploy this Web App, check the instructions for setting up Django Web Apps on
 
 ## USAGE :pick:
 
-Getting started with using ***Libertas*** is easy.
--  Make an account, click the `New Bit` button, write something, add a picture if you want, and send it off.
--  Congratulations! You just made your first "Bit"! A "Bit" is what we call a "Tweet" but Twitter is a taboo platform so we don't mention their name. (Except in this instance.)
-- To follow someone while logged in, add their username after `/profile/` part.
-- To share your public profile on ***Libertas*** simply append `/user/yourusername` to the end of the ***Libertas*** root URL.
-- If you click the `timeline` button, you can see all the "Bits" of all the users you have followed.
+Getting started with using ***Libertas*** is easy! :fox_face:
+
+-  Make an account.
+- You will be redirected to your dashboard. Press the "New Bit" button.
+- Write something and click "Save".
+-  Congratulations! You just made your first "Bit"!
+- To follow someone while logged in, add their username after the `/profile/` part in the browser address bar. Then click the "Follow" part.
+- To share your public profile on ***Libertas*** simply append `/user/yourusername` to the end of the ***Libertas*** root URL in the browser address bar.
+- If you click the `timeline` button, you can see all the latest "Bits" of all the users you have followed.
 
 
 ## NOTE :scroll:

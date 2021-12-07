@@ -62,9 +62,6 @@ def delete_user(request):
     return redirect('accounts:home')
 @login_required
 def followRequest(request, username):
-    # Adri is logged in, following alexandera21
-    # username = alexandera21 (alien)
-    # request.user.username = adri (ME)
     you = LibertasUser.objects.get(username=request.user.username)
     alienUser = LibertasUser.objects.get(username=username)
     try:

@@ -14,29 +14,31 @@
       <p class="followInfo">Followers: {{ followerCount }} Following: {{ followingCount }}</p>
      </div>
 
-     
-    {% if bits.items %}
 
-     {% for key,value in bits.items %}
+    {% if bits.all %}
+
+     {% for item in bits.all %}
 
       <div class="bit">
        <img class="bitProfilePicture" src="{{ profile_pic }}"/>
-       <p class="bitUserName">@{{ value.1 }}</p>
-       <p class="bit">{{ key }}</p>
+       <p class="bitUserName">@{{ item.2 }}</p>
+       <p class="bit">{{ item.0 }}</p>
        <hr/>
-       <button onclick="window.location.href='{% url 'bits:reBit' bitPk=value.2 %}'" class="bitAction">ReBit</button>
-       <button onclick="window.location.href='{% url 'bits:likeBit' bitPk=value.2 %}'" class="bitAction">Like</button>
-       <p class="bitAction">{{ value.0 }}</p>
+       <button onclick="window.location.href='{% url 'bits:reBit' bitPk=item.3 %}'" class="bitAction">ReBit</button>
+       <button onclick="window.location.href='{% url 'bits:likeBit' bitPk=item.3 %}'" class="bitAction">Like</button>
+       <p class="bitAction">{{ item.1 }}</p>
       </div>
 
      {% endfor %}
 
     {% else %}
 
-     <div class="bit">
-      <p class="bit"><p>No bits posted by this user yet!</p></p>
-      <hr/>
-     </div>
+    <div class="bit">
+     <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+     <p class="bitUserName">@{{ username  }}</p>
+     <p class="bit">{{ username }} hasn't posted anything yet.</p>
+     <hr/>
+    </div>
 
     {% endif %}
 

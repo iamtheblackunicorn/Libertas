@@ -5,9 +5,11 @@ from .models import BitLike
 from django.utils.http import *
 from django.utils.encoding import *
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from accounts.models import LibertasUser
 from django.contrib.auth.decorators import login_required
+
 def newBit(request, username):
     if request.method == "POST":
         form = BitForm(request.POST)
@@ -29,16 +31,16 @@ def publicProfileViewLoggedIn(request, username):
     bio = LibertasUser.objects.get(username=username).bio
     followerCount = 0
     followingCount = 0
-    bitLikeDict = {}
+    bitLikeDict = []
     for i in bits:
         bitPk = i.pk
         bitText = i.bitBody
         bitSender = i.sender.username
         likeCount = BitLike.objects.filter(bitData=Bit.objects.get(pk=bitPk)).all().count()
         if likeCount:
-            bitLikeDict[bitText] = [likeCount,bitSender,bitPk]
+            bitLikeDict = bitLikeDict + [[bitText,likeCount,bitSender,bitPk]]
         else:
-            bitLikeDict[bitText] = [likeCount,bitSender,bitPk]
+            bitLikeDict = bitLikeDict + [[bitText,likeCount,bitSender,bitPk]]
     followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
     followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
     print(bitLikeDict)
@@ -77,13 +79,18 @@ def reBit(request, bitPk):
 @login_required
 def getTheLatestTweetsFromFollowing(request):
     username = request.user.username
+    profile_pic = request.user.profile_pic.url
     bitList = []
     you = LibertasUser.objects.get(username=username)
     allUsersFollowed = LibertasUser.objects.all().filter(follower=you.pk)
     for i in allUsersFollowed:
         userObject = i
-        bitList = bitList + [Bit.objects.filter(sender=userObject.pk).order_by('date').first()]
-    return render(request, 'bits/timeline.html', {'content':bitList, 'username':username})
+        bitterProfilePic = userObject.profile_pic.url
+        bit = Bit.objects.filter(sender=userObject.pk).order_by('date').first()
+        likeCount = BitLike.objects.filter(bitData=bit).all().count()
+        bitList = bitList + [[bit.bitBody, bit.sender, bit.pk, likeCount, bitterProfilePic]]
+    print(bitList)
+    return render(request, 'bits/timeline.html', {'bits':bitList, 'username':username, 'profile_pic':profile_pic})
 @login_required
 def publicProfileView(request, username):
     alien = LibertasUser.objects.get(username=username)
@@ -93,16 +100,31 @@ def publicProfileView(request, username):
     banner_pic = alien.banner_pic.url
     followerCount = 0
     followingCount = 0
-    bitLikeDict = {}
+    bitLikeDict = []
     for i in bits:
         bitPk = i.pk
         bitText = i.bitBody
         bitSender = i.sender.username
         likeCount = BitLike.objects.filter(bitData=Bit.objects.get(pk=bitPk)).all().count()
         if likeCount:
-            bitLikeDict[bitText] = [likeCount,bitSender,bitPk]
+            bitLikeDict = bitLikeDict + [[bitText,likeCount,bitSender,bitPk]]
         else:
-            bitLikeDict[bitText] = [likeCount,bitSender,bitPk]
+            bitLikeDict = bitLikeDict + [[bitText,likeCount,bitSender,bitPk]]
     followerCount = LibertasUser.objects.filter(following=alien.pk).all().count()
     followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
     return render(request, 'bits/publicProfile.html', {'bits': bitLikeDict, 'bio':bio, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount})
+
+def apiUserProfile(request,username):
+    pass
+
+def getApiBits(request,username):
+    pass
+
+def apiLike(request,username):
+    pass
+
+def apiNewBit(request,username):
+    pass
+
+def apiReBit(request,username):
+    pass

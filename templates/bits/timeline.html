@@ -5,26 +5,32 @@
    {% include "accounts/includes/header.html" %}
 
    <body>
-   {% if content %}
-    {% for object in content %}
-     <div class="bit">
-      <img class="bitProfilePicture" src="{{ profile_pic }}"/>
-      <p class="bitUserName">{{ object.sender }}</p>
-      <p class="bit">{{ object.bitBody }}</p>
-      <hr/>
-      <button class="bitAction">ReBit</button>
-      <button class="bitAction">Like</button>
-      <p class="bitAction">2.3k</p>
-    </div>
-    {% endfor %}
+
+   {% if bits %}
+
+   {% for bit in bits %}
+
+   <div class="bit">
+    <img class="bitProfilePicture" src="{{ bit.4 }}"/>
+    <p class="bitUserName">{{ bit.1 }}</p>
+    <p class="bit">{{ bit.0 }}</p>
+    <hr/>
+    <button onclick="window.location.href='{% url 'bits:reBit' bitPk=bit.2 %}'" class="bitAction">ReBit</button>
+    <button onclick="window.location.href='{% url 'bits:reBit' bitPk=bit.2 %}'" class="bitAction">Like</button>
+    <p class="bitAction">{{ bit.3 }}</p>
+   </div>
+
+   {% endfor %}
+
    {% else %}
    <div class="bit">
-    <img class="bitProfilePicture" src="{{ profile_pic }}"/>
-    <p class="bitUserName">@{{ username }}</p>
-    <p class="bit"><p>No bits posted by this user yet!</p></p>
+    <img class="bitProfilePicture" src="{{ request.user.profile_pic.url }}"/>
+    <p class="bitUserName">@{{ request.user.username  }}</p>
+    <p class="bit">You're not following anyone yet.</p>
     <hr/>
    </div>
    {% endif %}
+
    </body>
   </html>
 {% endblock %}

@@ -19,19 +19,16 @@
       <button class="accountAction" onclick="window.location.href='{% url 'accounts:followUser' username=username %}'">Follow</button>
      </div>
 
-    {% if bits.items %}
+    {% if bits %}
 
-     {% for key,value in bits.items %}
+     {% for item in bits %}
 
-      <div class="bit">
-       <img class="bitProfilePicture" src="{{ profile_pic }}"/>
-       <p class="bitUserName">@{{ value.1 }}</p>
-       <p class="bit">{{ key }}</p>
-       <hr/>
-       <button onclick="window.location.href='{% url 'bits:reBit' bitPk=value.2 %}'" class="bitAction">ReBit</button>
-       <button onclick="window.location.href='{% url 'bits:likeBit' bitPk=value.2 %}'" class="bitAction">Like</button>
-       <p class="bitAction">{{ value.0 }}</p>
-      </div>
+     <div class="bit">
+      <img class="bitProfilePicture" src="{{ profile_pic }}"/>
+      <p class="bitUserName">@{{ username  }}</p>
+      <p class="bit">You haven't posted anything yet.</p>
+      <hr/>
+     </div>
 
      {% endfor %}
 
@@ -45,7 +42,7 @@
      </div>
 
     {% endif %}
-    
+
    </body>
   </html>
 {% endblock %}
