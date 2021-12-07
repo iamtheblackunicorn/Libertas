@@ -1,12 +1,12 @@
 # Libertas by Alexander Abraham, "The Black Unicorn".
 # Licensed under the MIT license.
-from django.utils.translation import gettext_lazy
+from django.utils.translation import ugettext_lazy
 from django.contrib.auth.base_user import BaseUserManager
 default = 'nobody@nothing.com'
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password, **extra_fields):
         if not email:
-            raise ValueError(gettext_lazy('Field(s) must be set!'))
+            raise ValueError(ugettext_lazy('Field(s) must be set!'))
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save()
