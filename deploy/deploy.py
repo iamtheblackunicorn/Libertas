@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2qb242gi7-8+1qsvlp8^g^kxi=@(%&6v!q5qcz2w)vqphawcao'
 DEBUG = True
 AUTH_USER_MODEL = 'accounts.LibertasUser'
-ALLOWED_HOSTS = ['blvckuncrn.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.libertas.vip']
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_SECONDS = 1
 SECURE_CONTENT_TYPE_NOSNIFF = True
