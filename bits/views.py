@@ -114,17 +114,65 @@ def publicProfileView(request, username):
     followingCount = LibertasUser.objects.filter(follower=alien.pk).all().count()
     return render(request, 'bits/publicProfile.html', {'bits': bitLikeDict, 'bio':bio, 'username': username, 'profile_pic':profile_pic, 'banner_pic':banner_pic, 'followerCount':followerCount, 'followingCount':followingCount})
 
-def apiUserProfile(request,username):
-    pass
+def apiUserProfile(request,apiKey):
+    try:
+        origin = request.get_host()
+        user = LibertasUser.objects.get(apiAuth=apiKey)
+        username = user.username
+        userProfilePic = origin + user.profile_pic.url
+        userBannerPic = origin + user.banner_pic.url
+        userBits = Bit.objects.all().filter(sender=user.pk)
+        responseList = []
+        for i in userBits:
+            bitBody = i.bitBody
+            bitDate = i.date
+            responseList = responseList + [[bitBody, bitDate]]
+        response = {
+            apiKey:[username,userProfilePic, userBannerPic],
+            'bits':responseList
+        }
+        return JsonResponse(response)
+    except Exception as error:
+        print(str(error))
+        response = {'404':'Error'}
+        return JsonResponse(response)
 
-def getApiBits(request,username):
-    pass
+def getApiBits(request,apiKey):
+    try:
+        origin = request.get_host()
+        you = LibertasUser.objects.get(apiAuth=apiKey)
+        followingUsers = LibertasUser.objects.all().filter(following=you)
+        response = {}
+        for i in followingUsers:
+            alienUserName = i.username
+            alienProfilePicture = origin + i.profile_pic.url
+            alienBitList = []
+            alienBits = Bit.objects.all().filter(sender=i)
+            for alienBit in alienBits:
+                alienBitBody = alienBit.bitBody
+                alienBitDate = alienBit.date
+                alienBitList = alienBitList + [[alienBitBody, alienBitDate]]
+            response[alienUserName] = [
+                {'profile_pic':alienProfilePicture,'bits':alienBitList}
+            ]
+        return JsonResponse(response)
+    except Exception as error:
+        print(str(error))
+        response = {'404':'Error'}
+        return JsonResponse(response)
 
-def apiLike(request,username):
-    pass
-
-def apiNewBit(request,username):
-    pass
-
-def apiReBit(request,username):
-    pass
+def apiNewBit(request,apiKey, message):
+    try:
+        body = ' '.join(message.split('_'))
+        newBit = Bit(
+            bitBody=body,
+            sender=LibertasUser.objects.get(apiAuth=apiKey),
+            date=models.DateTimeField(verbose_name='date',auto_now=True)
+        )
+        newBit.save()
+        response = {'200':'OK'}
+        return JsonResponse(response)
+    except Exception as error:
+        print(str(error))
+        response = {'500':'Error'}
+        return JsonResponse(response)
