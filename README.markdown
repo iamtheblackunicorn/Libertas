@@ -10,15 +10,6 @@
 
 Since I saw that governments and social media companies are de-platforming or outright cancelling people for uttering controversial views or views that do not fit in with the mainstream narrative of lies and deceit, I thought I'd create a social network that lets anyone say whatever they want, anywhere. You can do on here whatever the hell you want. I will not step in your way and should this become larger, neither will anyone else.
 
-## WARNING :warning:
-
-This project is still under active development.
-You can find a list of things still to implement, [here](TODO.markdown).
-
-## TRY IT :test_tube:
-
-You can find a live deployed version of the social network [here](https://www.libertas.vip).
-
 ## SETTING UP :hammer:
 
 ### Requirements :school_satchel:
